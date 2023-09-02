@@ -1,36 +1,83 @@
 import java.io.*;
 
 class Palindromo 
-{
-
-  public static boolean IsPali(String input) 
+{  
+  public static boolean isPali(String input) 
   {
     boolean resp = true;
-
-    for (int i = 0; i < input.length() / 2; i++) 
-    {
-      for (int j=input.length() - 1; j > input.length() / 2; j--) 
-      {
-        if (input.charAt(i) != input.charAt(j)) 
+	char space =' ';
+	if(input.length()==1)
 	{
-          resp = false;
+		resp=true;
+		return resp;
+	}
+	else if(input.length()<=0)
+	{
+		return false;
+	}
+
+    for (int i = 0, j = (input.length() -1); i < (input.length() / 2); i++, j--)
+    {
+	   while(!Character.isLetter(input.charAt(j)))
+	   {
+		   j--;
+	   }	  
+	   while(!Character.isLetter(input.charAt(i)))	   
+	   {
+		   i++;
+	   }	
+       if (input.charAt(i) != input.charAt(j)) 
+	   {
+		  resp=false;
           i = input.length();
           j = 0;
-        } 
-      } 
+	   }
     } 
+   
     return resp;
   }
-  
-  public static void main(String[] paramArrayOfString) throws IOException 
+
+  public static boolean isFim(String buffer)
   {
-    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+  	  if(buffer.charAt(0)=='F' && buffer.charAt(1)=='I' && buffer.charAt(2)=='M')
+	  {
+		  return true;
+	  }
+	  else
+	  {
+		  return false;
+	  }
+  }
+
+  public static void isPaliPrint(String line)
+  {
+		if(Palindromo.isPali(line))
+		{
+
+			System.out.println("SIM");
+				
+		}
+		else
+		{
+
+			System.out.println("NAO");
+				
+		}
+  }
+  
+  public static void main(String[] args) throws IOException 
+  {
+    BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
     
-    String str = bufferedReader.readLine();
-    
-    System.out.println("Line: " + str);
-    
-    System.out.println("palindromo ?: " + IsPali(str));
+    String line = buffer.readLine();
+
+	while(!(Palindromo.isFim(line)))
+	{
+		Palindromo.isPaliPrint(line);
+					
+    	line = buffer.readLine();
+
+  	}
   }
 }
 
