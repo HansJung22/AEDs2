@@ -14,15 +14,13 @@ class Alteracao_Aleatoria
 
         do
         {
-          a=(char)gerador.nextInt();
-        }while(Character.isLetter(a));
+          a=(char) ((gerador.nextInt()%26)+'a');
+        }while(!Character.isLetter(a));
 
         do
         {
-          b=(char)gerador.nextInt();
-        }while(Character.isLetter(b));
-        
-        System.out.println(a+", "+b);
+          b=(char) ((gerador.nextInt()%26)+'a');
+        }while(!Character.isLetter(b));
 
         for(int i=0; i<line.length(); i++)
         {
@@ -36,15 +34,32 @@ class Alteracao_Aleatoria
         return auxlineb;
     }
 
+    public static boolean isFim(String buffer)
+    {
+  	  if(buffer.charAt(0)=='F' && buffer.charAt(1)=='I' && buffer.charAt(2)=='M')
+	  {
+		  return true;
+	  }
+	  else
+	  {
+		  return false;
+	  }
+    }
+
     public static void main(String[] args) throws IOException
     {
         BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
         
         String line= new String(buffer.readLine());
 
-        line=alt_Line(line);
+        while(!isFim(line))
+        {
+            line=alt_Line(line);
 
-        System.out.println(line);
+            System.out.println(line);    
 
+            line=buffer.readLine();
+        }
+        
     }
 }
