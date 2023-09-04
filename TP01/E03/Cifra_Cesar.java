@@ -8,12 +8,9 @@ class Cifra_Cesar
 		{
 			car=(char) (car-23);
 		}
-		else if((car>='a'&& car<='z') || (car>='A'&& car<='Z'))
-		{
+		else{
 			car=(char) (car+3);
 		}
-		else
-		{}
 
 		return car;
 	}
